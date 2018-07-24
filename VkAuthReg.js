@@ -30,30 +30,3 @@ async function vkAutoReg(options = {}) {
 
 exports.GetPhoneNumberError = GetPhoneNumberError
 exports.vkAutoReg = vkAutoReg
-
-/**
-Зареганные аки
-79163197819 12qwaszx
-79154416099 12qwaszx
-
-9153048652 https://vk.com/id467471772
-- 9161417984
-9851606409 https://vk.com/id467472027  Петр Ершев
-9154081677
-
-{ phone: '+79858443927',
-  pass: '12qwaszx',
-  id: 'https://vk.com/id467501831' }
-
-
-{ phone: '+79167019826',
-pass: '12qwaszx',
-id: 'https://vk.com/id467509515' }
-
-
-
-{ phone: '+79168086251',
-  pass: '12qwaszx',
-  id: 'https://vk.com/id467507766' }
-
-*/
