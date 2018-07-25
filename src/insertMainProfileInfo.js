@@ -1,4 +1,4 @@
-const sleepPromise = require('src/sleepPromise')
+const sleepPromise = require('./sleepPromise')
 
 async function selectBirthdayDay(page, value) {
   await page.click('.ij_bday .selector_dropdown')

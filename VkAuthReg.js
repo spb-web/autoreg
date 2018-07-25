@@ -1,9 +1,7 @@
-require('app-module-path').addPath(__dirname)
-
 const openVk = require('./src/openVk')
 const insertMainProfileInfo = require('./src/insertMainProfileInfo')
-const getPhoneNumber = require('src/getPhoneNumber')
-const GetPhoneNumberError = require('src/GetPhoneNumberError')
+const getPhoneNumber = require('./src/getPhoneNumber')
+const GetPhoneNumberError = require('./src/GetPhoneNumberError')
 
 
 async function vkAutoReg(options = {}) {

@@ -1,6 +1,6 @@
 const Onlinesim = require('node-onlinesim-api')
-const sleepPromise = require('src/sleepPromise')
-const GetPhoneNumberError = require('src/GetPhoneNumberError')
+const sleepPromise = require('./sleepPromise')
+const GetPhoneNumberError = require('./GetPhoneNumberError')
 
 
 function getPhoneNumber(onlinesimKey) {
