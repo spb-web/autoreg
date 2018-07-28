@@ -21,6 +21,13 @@ async function selectBirthdayYear(page, value) {
   await sleepPromise(300)
 }
 
+async function selectGender(page, value) {
+  const index = value === 'male' ? 3 : 2
+  
+  await page.click(`#ij_sex_row .radiobtn:nth-child(${ index })`)
+  await sleepPromise(300)
+}
+
 async function insertPhoneAndPassword(page, phoneData, password) {
   await page.type('#join_phone', phoneData.phone.replace('+7', ''))
   await sleepPromise(300)
@@ -48,7 +55,13 @@ async function insertPhoneAndPassword(page, phoneData, password) {
 
 
 async function insertMainProfileInfo(webContext, profileInfo={}, phoneData) {
- const { firstName='Иван', lastName='Иванов', birthday=[7, 10, 1995], password } = profileInfo
+ const {
+   firstName='Саша',
+   lastName='Иванов',
+   birthday=[7, 10, 1995],
+   password,
+   gender
+ } = profileInfo
 
 
   await webContext.page.type('#ij_first_name', firstName)
@@ -57,6 +70,7 @@ async function insertMainProfileInfo(webContext, profileInfo={}, phoneData) {
   await selectBirthdayDay(webContext.page, birthday[0])
   await selectBirthdayMonth(webContext.page, birthday[1])
   await selectBirthdayYear(webContext.page, birthday[2])
+  await selectGender(webContext.page, gender)
 
   await webContext.page.click('#ij_submit')
   await webContext.page.waitForSelector('#join_phone')

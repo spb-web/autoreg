@@ -11,10 +11,11 @@ async function vkAutoReg(options = {}) {
   const webContext = await openVk(options.headless || false)
   // Данные пользователя
   const userData = {
-    firstName: 'Константин',
-    lastName: 'Иванов',
+    firstName: 'Ирина',
+    lastName: 'Грибоедова',
     password: Math.random().toString(20),
     birthday: [7, 10, 1994],
+    gender: 'famale'
     ...options.userData
   }
   // Заполнение формы, получение и отправка sms кода
