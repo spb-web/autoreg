@@ -1,8 +1,8 @@
 {
-  "name": "vk_user_monster",
+  "name": "VkAutoReg",
   "version": "1.0.0",
   "description": "",
-  "main": "VkAuthReg.js",
+  "main": "VkAutoReg.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

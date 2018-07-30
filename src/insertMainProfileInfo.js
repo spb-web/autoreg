@@ -1,6 +1,8 @@
 const sleepPromise = require('./sleepPromise')
+const debug = require('debug')('VkAutoReg')
 
 async function selectBirthdayDay(page, value) {
+  debug('Установка дня даты рождения')
   await page.click('.ij_bday .selector_dropdown')
   await sleepPromise(300)
   await page.click(`.ij_bday li:nth-child(${value + 1})`)
@@ -8,6 +10,7 @@ async function selectBirthdayDay(page, value) {
 }
 
 async function selectBirthdayMonth(page, value) {
+  debug('Установка месяца даты рождения')
   await page.click('.ij_bmonth .selector_dropdown')
   await sleepPromise(300)
   await page.click(`.ij_bmonth li:nth-child(${value + 1})`)
@@ -15,6 +18,7 @@ async function selectBirthdayMonth(page, value) {
 }
 
 async function selectBirthdayYear(page, value) {
+  debug('Установка года даты рождения')
   await page.click('.ij_byear .selector_dropdown')
   await sleepPromise(300)
   await page.click(`.ij_byear li[val="${value}"]`)
@@ -22,22 +26,35 @@ async function selectBirthdayYear(page, value) {
 }
 
 async function selectGender(page, value) {
+  debug('Установка пола даты рождения')
   const index = value === 'male' ? 3 : 2
-  
+
   await page.click(`#ij_sex_row .radiobtn:nth-child(${ index })`)
   await sleepPromise(300)
 }
 
 async function insertPhoneAndPassword(page, phoneData, password) {
+  debug('Ввод номера телефона')
   await page.type('#join_phone', phoneData.phone.replace('+7', ''))
   await sleepPromise(300)
+  debug('Установка галочки принятия правил')
+  await page.click('#join_accept_terms_checkbox .checkbox')
+  await sleepPromise(300)
+  debug('Нажимаем "Получить код"')
   await page.click('#join_send_phone')
 
   // Тут нужна проверка не заблокирован ли номер телефона
-
+  debug('Ожиание отправки смс сервером')
   await page.waitForSelector('#join_code')
-  await page.type('#join_code', await phoneData.getSmsCode())
+  await sleepPromise(5000)
+  debug('Ожиание получения смс')
+  const smsCode = await phoneData.getSmsCode()
+  debug('Код получен: ' + smsCode)
+  debug('Вводим код')
+  await page.type('#join_code', smsCode)
+
   await sleepPromise(300)
+  debug('отправляем полученный код')
   await page.click('#join_send_code')
 
   await sleepPromise(5000)
@@ -70,7 +87,7 @@ async function insertMainProfileInfo(webContext, profileInfo={}, phoneData) {
   await selectBirthdayDay(webContext.page, birthday[0])
   await selectBirthdayMonth(webContext.page, birthday[1])
   await selectBirthdayYear(webContext.page, birthday[2])
-  await selectGender(webContext.page, gender)
+  //await selectGender(webContext.page, gender)
 
   await webContext.page.click('#ij_submit')
   await webContext.page.waitForSelector('#join_phone')

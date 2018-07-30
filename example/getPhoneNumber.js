@@ -3,7 +3,7 @@ const sleepPromise = require('./sleepPromise')
 const GetPhoneNumberError = require('./GetPhoneNumberError')
 
 
-function getPhoneNumber(onlinesimKey) {
+function getPhoneNumber() {
   const onlinesim = Onlinesim(onlinesimKey)
 
   return onlinesim.getNum('vk').then((res) => {
@@ -18,7 +18,7 @@ function getPhoneNumber(onlinesimKey) {
       getSmsCode: () => {
         return getStatus(res[0].tzid)
       },
-      getSmsCodeSuccess: () => {
+      setOperationSuccess: () => {
         return onlinesim.setOperationOk(res[0].tzid)
       }
     }
